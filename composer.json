@@ -1,0 +1,11 @@
+{
+    "name": "flux/auth",
+    "description": "Flux Auth Component for Laravel",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Flux\\Auth\\": "src/"
+        }
+    },
+    "require": {}
+}
