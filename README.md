@@ -1,6 +1,6 @@
 -- Doc88 / Flux --
 
-Biblioteca paraintegrações utilizando o Flux / Doc88 .
+Biblioteca para integrações utilizando o Flux / Doc88 .
 
 -- Instalação --
 
