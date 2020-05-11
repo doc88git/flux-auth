@@ -1,11 +1,13 @@
 {
-    "name": "flux/auth",
-    "description": "Flux Auth Component for Laravel",
+    "name": "doc88/flux",
+    "description": "Doc88 / Flux Component for Laravel",
     "type": "library",
     "autoload": {
         "psr-4": {
-            "Flux\\Auth\\": "src/"
+            "Doc88\\Flux\\": "src/"
         }
     },
-    "require": {}
+    "require": {
+        "php": ">=7.2.0"
+    }
 }

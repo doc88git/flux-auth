@@ -1,6 +1,6 @@
 <?php
 
-namespace Flux\Auth;
+namespace Doc88\Flux;
 
 class Auth
 {
