@@ -1,6 +1,6 @@
--- Flux Auth --
+-- Doc88 / Flux --
 
-Componente para Autenticação e Permissionamento utilizando o Flux.
+Biblioteca paraintegrações utilizando o Flux / Doc88 .
 
 -- Instalação --
 
