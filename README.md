@@ -1,11 +1,15 @@
--- Doc88 / Flux --
+# Doc88 / Flux
 
-Biblioteca para integrações utilizando o Flux / Doc88 .
+Biblioteca para integrações de aplicações Laravel utilizando o Flux / Doc88 .
 
--- Instalação --
+# Instalação
 
-composer require doc88/flux
+ - Execute o comando *composer require doc88/flux*
+ - Adicione *Doc88\Flux\FluxServiceProvider* aos providers em *config/app.php*
+ - Execute o comando *php artisan vendor:publish*
 
--- Utilização --
+# Utilização
 
-A classe Doc88\Flux\Auth deve ser utilizada para realização das autenticações.
+## Classe Doc88\Flux\Auth
+
+Classe para realizar funções de Auth no Flux.

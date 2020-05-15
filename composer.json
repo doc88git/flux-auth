@@ -1,6 +1,6 @@
 {
     "name": "doc88/flux",
-    "description": "Doc88 / Flux Component for Laravel",
+    "description": "Biblioteca para integrações de aplicações Laravel utilizando o Flux / Doc88 .",
     "type": "library",
     "autoload": {
         "psr-4": {
