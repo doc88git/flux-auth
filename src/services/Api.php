@@ -16,7 +16,7 @@ class Api
 
     public function login( $account, $product, $email, $password )
     {
-        $headers = $this->getLoginHeaders( $account, $product );
+        $headers = (array) $this->getLoginHeaders( $account, $product );
         
         return Http::post( 
             $this->url . "auth/login",
@@ -25,7 +25,7 @@ class Api
                 'email' => $email,
                 'password' => $password
             ]
-        );
+        )->body;
     }
 
     private function getLoginHeaders( $account, $product )
@@ -39,7 +39,7 @@ class Api
                 'account' => $account, 
                 'product' => $product
             ]
-        );
+        )->body;
     }
 
 }
