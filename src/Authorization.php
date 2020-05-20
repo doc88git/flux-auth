@@ -7,16 +7,10 @@ use Doc88\Flux\Services\Api;
 class Authorization
 {
 
-    private $api;
-
-    public function __construct()
+    public function login( $email, $password, $account = null, $product =null )
     {
-        $this->api = new Api();
-    }
-
-    public function login( $account, $product, $email, $password )
-    {
-        return response()->json( $this->api->login( $account, $product, $email, $password ) );
+        $response = new Api($account, $product);
+        return response()->json( $response->login($email, $password) );
     }
 
 }
