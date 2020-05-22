@@ -8,6 +8,7 @@ class Api
 {
 
     private $account;
+    private $action;
     private $product;
 
     private $messages = [
@@ -27,6 +28,8 @@ class Api
         if( !$this->checkAccountProduct() ) return $this->messages['accountProduct'];
 
         $headers = (array) $this->getLoginHeaders();
+
+        dd($headers);
         
         return $this->apiCall(
             "auth/login", 
@@ -48,6 +51,21 @@ class Api
             [
                 'account' => $this->account, 
                 'product' => $this->product
+            ]
+        );
+    }
+
+    private function getPermissionHeaders()
+    {        
+        return $this->apiCall(
+            "applications/headers/permission", 
+            [
+                'Accept' => 'application/json'
+            ], 
+            [
+                'account' => $this->account, 
+                'action' => $this->action,
+                'product' => $this->product,
             ]
         );
     }
