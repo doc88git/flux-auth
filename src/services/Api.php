@@ -7,70 +7,18 @@ use Unirest\Request as Http;
 class Api
 {
 
-    private $account;
-    private $action;
-    private $product;
+    protected $url;
 
-    private $messages = [
+    protected $messages = [
         'accountProduct' => 'O Produto e a Conta não puderam ser identificados'
     ];
-    private $url;
 
-    public function __construct($account, $product)
+    public function __construct()
     {
-        $this->account = $account;
-        $this->product = $product;
         $this->url = config( 'flux.url' );
     }
 
-    public function login( $email, $password )
-    {
-        if( !$this->checkAccountProduct() ) return $this->messages['accountProduct'];
-
-        $headers = (array) $this->getLoginHeaders();
-
-        dd($headers);
-        
-        return $this->apiCall(
-            "auth/login", 
-            $headers, 
-            [
-                'email' => $email,
-                'password' => $password
-            ]
-        );
-    }
-
-    private function getLoginHeaders()
-    {        
-        return $this->apiCall(
-            "applications/headers/login", 
-            [
-                'Accept' => 'application/json'
-            ], 
-            [
-                'account' => $this->account, 
-                'product' => $this->product
-            ]
-        );
-    }
-
-    private function getPermissionHeaders()
-    {        
-        return $this->apiCall(
-            "applications/headers/permission", 
-            [
-                'Accept' => 'application/json'
-            ], 
-            [
-                'account' => $this->account, 
-                'action' => $this->action,
-                'product' => $this->product,
-            ]
-        );
-    }
-
-    private function apiCall( $api, $headers, $body, $type = 'post' )
+    protected function call( $api, $headers, $body, $type = 'post' )
     {
         return Http::{$type}( 
             $this->url . $api, 
@@ -79,7 +27,7 @@ class Api
         )->body;
     }
 
-    private function checkAccountProduct()
+    protected function checkAccountProduct()
     {
         if( is_null($this->account) || is_null($this->product) ){
             $accountProduct = $this->detectAccountProduct();
@@ -93,7 +41,7 @@ class Api
         return true;
     }
 
-    private function detectAccountProduct()
+    protected function detectAccountProduct()
     {
         if(isset($_SERVER['HTTP_HOST'])){
             $host = explode('.', $_SERVER['HTTP_HOST']);
