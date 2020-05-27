@@ -5,25 +5,21 @@ namespace Doc88\Flux\Services;
 class Permission extends Api
 {
 
-    protected $account;
     protected $action;
-    protected $product;
 
-    public function __construct($account, $action, $product)
+    public function __construct($account, $product)
     {
-        parent::__construct();
+        parent::__construct($account, $product);
 
-        $this->account = $account;
-        $this->action = $action;
-        $this->product = $product;
+        $this->function = 'permission';
     }
 
-    public function permission( $token )
+    public function permission( $params )
     {
-        if( !$this->checkAccountProduct() ) return $this->messages['accountProduct'];
+        if( !$this->checkParams( $params ) ) return $this->messages['params'];
 
         $headers = (array) $this->getPermissionHeaders();
-        $headers['Authorization'] = 'Bearer ' . $token;
+        $headers['Authorization'] = 'Bearer ' . $params['token'];
         
         return $this->call(
             "applications/permission", 
@@ -31,6 +27,15 @@ class Permission extends Api
             [],
             'get'
         );
+    }
+
+    protected function checkParams( $params )
+    {
+        if( empty( $params['token'] ) || empty( $params['action'] ) ) return false;
+
+        $this->action = $params['action'];
+
+        return true;
     }
 
     protected function getPermissionHeaders()

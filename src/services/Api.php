@@ -7,15 +7,34 @@ use Unirest\Request as Http;
 class Api
 {
 
+    protected $account;
+    protected $product;
     protected $url;
 
+    protected $function;
+
     protected $messages = [
-        'accountProduct' => 'O Produto e a Conta não puderam ser identificados'
+        'accountProduct' => 'O Produto e a Conta não puderam ser identificados',
+        'params' => 'Parâmetros incorretos ou em falta',
+        'error' => 'Ocorreu um erro',
     ];
 
-    public function __construct()
+    public function __construct($account, $product)
     {
+        $this->account = $account;
+        $this->product = $product;
         $this->url = config( 'flux.url' );
+    }
+
+    public function check( $params )
+    {
+        if( !$this->checkAccountProduct() ) return $this->messages['accountProduct'];
+
+        if( !empty( $this->function ) ){
+            return $this->{$this->function}( $params );
+        }
+
+        return $this->messages['error'];
     }
 
     protected function call( $api, $headers, $body, $type = 'post' )
@@ -29,7 +48,7 @@ class Api
 
     protected function checkAccountProduct()
     {
-        if( is_null($this->account) || is_null($this->product) ){
+        if( empty($this->account) || empty($this->product) ){
             $accountProduct = $this->detectAccountProduct();
             
             if( !is_array( $accountProduct ) ) return false;

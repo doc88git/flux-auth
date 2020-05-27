@@ -5,20 +5,16 @@ namespace Doc88\Flux\Services;
 class Login extends Api
 {
 
-    protected $account;
-    protected $product;
-
     public function __construct($account, $product)
     {
-        parent::__construct();
+        parent::__construct($account, $product);
 
-        $this->account = $account;
-        $this->product = $product;
+        $this->function = 'login';
     }
 
-    public function login( $email, $password )
+    public function login( $params )
     {
-        if( !$this->checkAccountProduct() ) return $this->messages['accountProduct'];
+        if( !$this->checkParams( $params ) ) return $this->messages['params'];
 
         $headers = (array) $this->getLoginHeaders();
         
@@ -26,10 +22,16 @@ class Login extends Api
             "auth/login", 
             $headers, 
             [
-                'email' => $email,
-                'password' => $password
+                'email' => $params['email'],
+                'password' => $params['password']
             ]
         );
+    }
+
+    protected function checkParams( $params )
+    {
+        if( empty( $params['email'] ) || empty( $params['password'] ) ) return false;
+        return true;
     }
 
     protected function getLoginHeaders()

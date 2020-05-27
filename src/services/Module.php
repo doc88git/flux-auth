@@ -5,25 +5,21 @@ namespace Doc88\Flux\Services;
 class Module extends Api
 {
 
-    protected $account;
     protected $module;
-    protected $product;
 
-    public function __construct($account, $module, $product)
+    public function __construct($account, $product)
     {
-        parent::__construct();
+        parent::__construct($account, $product);
 
-        $this->account = $account;
-        $this->module = $module;
-        $this->product = $product;
+        $this->function = 'module';
     }
 
-    public function module( $token )
+    public function module( $params )
     {
-        if( !$this->checkAccountProduct() ) return $this->messages['accountProduct'];
+        if( !$this->checkParams( $params ) ) return $this->messages['params'];
 
         $headers = (array) $this->getModuleHeaders();
-        $headers['Authorization'] = 'Bearer ' . $token;
+        $headers['Authorization'] = 'Bearer ' . $params['token'];
         
         return $this->call(
             "applications/module", 
@@ -31,6 +27,15 @@ class Module extends Api
             [],
             'get'
         );
+    }
+
+    protected function checkParams( $params )
+    {
+        if( empty( $params['token'] ) || empty( $params['module'] ) ) return false;
+
+        $this->module = $params['module'];
+
+        return true;
     }
 
     protected function getModuleHeaders()

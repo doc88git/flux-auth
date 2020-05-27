@@ -9,22 +9,22 @@ use Doc88\Flux\Services\Permission;
 class Authorization
 {
 
-    public function login( $email, $password, $account, $product )
+    public static function login( $email, $password, $account, $product )
     {
         $response = new Login($account, $product);
-        return response()->json( $response->login($email, $password) );
+        return response()->json( $response->check(['email' => $email, 'password' => $password]) );
     }
 
-    public function module( $token, $account, $product, $module )
+    public static function module( $token, $account, $product, $module )
     {
-        $response = new Module($account, $module, $product);
-        return response()->json( $response->permission($token) );
+        $response = new Module($account, $product);
+        return response()->json( $response->check(['token' => $token, 'module' => $module]) );
     }
 
-    public function permission( $token, $account, $product, $action )
+    public static function permission( $token, $account, $product, $action )
     {
-        $response = new Permission($account, $action, $product);
-        return response()->json( $response->permission($token) );
+        $response = new Permission($account, $product);
+        return response()->json( $response->check(['token' => $token, 'action' => $action]) );
     }
 
 }
