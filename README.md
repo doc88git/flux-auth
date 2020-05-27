@@ -15,6 +15,6 @@ Biblioteca para integrações de aplicações Laravel utilizando o Flux / Doc88 
 Classe para realizar funções de Auth no Flux. Os métodos para integração são:
 
  * *Login* :
-    '''php
+    ```php
         Auth::login('moacir.junior@doc89.com.br','123456','comerc','zordon');
-    '''
+    ```
