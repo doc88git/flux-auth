@@ -18,8 +18,9 @@ class Module extends Api
     {
         if( !$this->checkParams( $params ) ) return $this->messages['params'];
 
-        $headers = (array) $this->getModuleHeaders();
-        $headers['Authorization'] = 'Bearer ' . $params['token'];
+        $headers = $this->getHeaders( $params['token'] );
+
+        if(isset( $headers['error'] )) return $headers;
         
         return $this->call(
             "applications/module", 
@@ -38,9 +39,9 @@ class Module extends Api
         return true;
     }
 
-    protected function getModuleHeaders()
+    protected function getHeaders( $token )
     {        
-        return $this->call(
+        $headers = $this->call(
             "applications/headers/module", 
             [
                 'Accept' => 'application/json'
@@ -51,6 +52,9 @@ class Module extends Api
                 'product' => $this->product,
             ]
         );
+        $headers['Authorization'] = 'Bearer ' . $token;
+
+        return $headers;
     }
 
 }

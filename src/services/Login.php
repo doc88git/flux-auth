@@ -16,7 +16,9 @@ class Login extends Api
     {
         if( !$this->checkParams( $params ) ) return $this->messages['params'];
 
-        $headers = (array) $this->getLoginHeaders();
+        $headers = $this->getHeaders();
+        
+        if(isset( $headers['error'] )) return $headers;
         
         return $this->call(
             "auth/login", 
@@ -34,7 +36,7 @@ class Login extends Api
         return true;
     }
 
-    protected function getLoginHeaders()
+    protected function getHeaders()
     {        
         return $this->call(
             "applications/headers/login", 

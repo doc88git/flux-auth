@@ -16,7 +16,8 @@ class Api
     protected $messages = [
         'accountProduct' => 'O Produto e a Conta não puderam ser identificados',
         'params' => 'Parâmetros incorretos ou em falta',
-        'error' => 'Ocorreu um erro',
+        'function' => 'Função não definida',
+        'error' => 'Ocorreu um erro na sua chamada',
     ];
 
     public function __construct($account, $product)
@@ -34,29 +35,12 @@ class Api
             return $this->{$this->function}( $params );
         }
 
-        return $this->messages['error'];
-    }
-
-    protected function call( $api, $headers, $body, $type = 'post' )
-    {
-        return Http::{$type}( 
-            $this->url . $api, 
-            $headers, 
-            $body
-        )->body;
+        return $this->messages['function'];
     }
 
     protected function checkAccountProduct()
     {
-        if( empty($this->account) || empty($this->product) ){
-            $accountProduct = $this->detectAccountProduct();
-            
-            if( !is_array( $accountProduct ) ) return false;
-
-            $this->account = $accountProduct[0];
-            $this->product = $accountProduct[1];
-        }
-
+        if( empty($this->account) || empty($this->product) ) return $this->detectAccountProduct();
         return true;
     }
 
@@ -64,13 +48,38 @@ class Api
     {
         if(isset($_SERVER['HTTP_HOST'])){
             $host = explode('.', $_SERVER['HTTP_HOST']);
-
-            if( !empty($host[0]) && !empty($host[1]) ){
-                return[ $host[0], $host[1] ];
-            }
+            return $this->updateAccountProduct($host[0], $host[1]);
         }
 
-        return null;
+        return false;
+    }
+
+    protected function updateAccountProduct( $account, $product )
+    {
+        if( !empty($account) && !empty($product) ){
+            $this->account = $account;
+            $this->product = $product;
+            return true;
+        }
+
+        return false;
+    }
+
+    protected function call( $api, $headers, $body, $type = 'post' )
+    {
+        try{
+
+            $response = Http::{$type}( $this->url . $api, $headers, $body);
+    
+            if( $response->code != 200 ) throw new \Exception( $this->messages['error'] );
+    
+            return (array) $response->body;
+
+        }catch(\Exception $e){
+                      
+            exit( json_encode([ 'error' => true, 'msg' => $e->getMessage() ]) );
+
+        }
     }
 
 }
