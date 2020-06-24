@@ -10,17 +10,13 @@ class Module extends Api
     public function __construct($account, $product)
     {
         parent::__construct($account, $product);
-
-        $this->function = 'module';
     }
 
-    public function module( $params )
+    public function check( $params )
     {
-        if( !$this->checkParams( $params ) ) return $this->messages['params'];
+        if( !$this->checkParams( $params ) ) throw new \Exception( $this->messages['params'] );
 
         $headers = $this->getHeaders( $params['token'] );
-
-        if(isset( $headers['error'] )) return $headers;
         
         return $this->call(
             "applications/module", 

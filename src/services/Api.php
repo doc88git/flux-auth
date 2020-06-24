@@ -16,7 +16,6 @@ class Api
     protected $messages = [
         'accountProduct' => 'O Produto e a Conta não puderam ser identificados',
         'params' => 'Parâmetros incorretos ou em falta',
-        'function' => 'Função não definida',
         'error' => 'Ocorreu um erro na sua chamada',
     ];
 
@@ -27,15 +26,14 @@ class Api
         $this->url = config( 'flux.url' );
     }
 
-    public function check( $params )
+    public function getResponse( $params )
     {
-        if( !$this->checkAccountProduct() ) return $this->messages['accountProduct'];
-
-        if( !empty( $this->function ) ){
-            return $this->{$this->function}( $params );
+        try{
+            if( !$this->checkAccountProduct() ) return $this->messages['accountProduct'];
+            return $this->check( $params );
+        }catch( \Exception $e ){
+            return [ 'error' => true, 'msg' => $e->getMessage() ];
         }
-
-        return $this->messages['function'];
     }
 
     protected function checkAccountProduct()
@@ -67,19 +65,9 @@ class Api
 
     protected function call( $api, $headers, $body, $type = 'post' )
     {
-        try{
-
-            $response = Http::{$type}( $this->url . $api, $headers, $body);
-    
-            if( $response->code != 200 ) throw new \Exception( $this->messages['error'] );
-    
-            return (array) $response->body;
-
-        }catch(\Exception $e){
-                      
-            exit( json_encode([ 'error' => true, 'msg' => $e->getMessage() ]) );
-
-        }
+        $response = Http::{$type}( $this->url . $api, $headers, $body);    
+        if( $response->code != 200 ) throw new \Exception( $this->messages['error'] );
+        return (array) $response->body;
     }
 
 }

@@ -8,17 +8,13 @@ class Login extends Api
     public function __construct($account, $product)
     {
         parent::__construct($account, $product);
-
-        $this->function = 'login';
     }
 
-    public function login( $params )
+    public function check( $params )
     {
-        if( !$this->checkParams( $params ) ) return $this->messages['params'];
+        if( !$this->checkParams( $params ) ) throw new \Exception( $this->messages['params'] );
 
         $headers = $this->getHeaders();
-        
-        if(isset( $headers['error'] )) return $headers;
         
         return $this->call(
             "auth/login", 

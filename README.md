@@ -63,13 +63,13 @@ Classe para realizar funções de Auth no Flux. Os métodos para integração s�
         ```
 * **Module** - Função para verificar se um usuário possui acesso a um módulo de uma aplicação/produto.
     ```php
-        Authorization::module( $token, $account, $product, $module )
+        Authorization::module( $token, $module, $account = null, $product = null )
     ```
     * **Parâmetros :**
         * *token :* Token de Login do Usuário, recebido através da função *Login*
+        * *module :* Slug identificador do módulo no Flux. Exemplo: *monitoria*
         * *conta :* Slug identificador da conta / empresa no Flux. Exemplo: *comerc*
         * *produto :* Slug identificador do produto / aplicativo no Flux. Exemplo: *zordon*
-        * *module :* Slug identificador do módulo no Flux. Exemplo: *monitoria*
     * **Retorno :**
         Em caso de sucesso, o retorno será um objeto json, como no exemplo abaixo.
         ```json
@@ -79,13 +79,13 @@ Classe para realizar funções de Auth no Flux. Os métodos para integração s�
         ```
 * **Permission** - Função para verificar se um usuário possui acesso a uma ação específica de uma aplicação/produto.
     ```php
-        Authorization::permission( $token, $account, $product, $action )
+        Authorization::permission( $token, $action, $account = null, $product = null )
     ```
     * **Parâmetros :**
         * *token :* Token de Login do Usuário, recebido através da função *Login*
+        * *action :* Slug identificador da ação no Flux. Exemplo: *cadastro-de-alarme*
         * *conta :* Slug identificador da conta / empresa no Flux. Exemplo: *comerc*
         * *produto :* Slug identificador do produto / aplicativo no Flux. Exemplo: *zordon*
-        * *action :* Slug identificador da ação no Flux. Exemplo: *cadastro-de-alarme*
     * **Retorno :**
         Em caso de sucesso, o retorno será um objeto json, como no exemplo abaixo.
         ```json

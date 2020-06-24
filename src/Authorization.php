@@ -12,19 +12,19 @@ class Authorization
     public static function login( $email, $password, $account = null, $product = null )
     {
         $response = new Login($account, $product);
-        return response()->json( $response->check(['email' => $email, 'password' => $password]) );
+        return response()->json( $response->getResponse(['email' => $email, 'password' => $password]) );
     }
 
     public static function module( $token, $module, $account = null, $product = null )
     {
         $response = new Module($account, $product);
-        return response()->json( $response->check(['token' => $token, 'module' => $module]) );
+        return response()->json( $response->getResponse(['token' => $token, 'module' => $module]) );
     }
 
     public static function permission( $token, $action, $account = null, $product = null )
     {
         $response = new Permission($account, $product);
-        return response()->json( $response->check(['token' => $token, 'action' => $action]) );
+        return response()->json( $response->getResponse(['token' => $token, 'action' => $action]) );
     }
 
 }
