@@ -9,7 +9,8 @@
     },
     "require": {
         "php": ">=7.2.0",
-        "mashape/unirest-php": "^3.0"
+        "mashape/unirest-php": "^3.0",
+        "doc88/flux-entity-permission": "^1.1"
     },
     "license": "MIT"
 }

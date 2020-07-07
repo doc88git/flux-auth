@@ -1,0 +1,88 @@
+[
+    {
+        "name": "doc88/flux-entity-permission",
+        "version": "1.1.0",
+        "version_normalized": "1.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/doc88git/flux-entity-permission.git",
+            "reference": "4d8804262261be8644a66623eb89c0deaf4cab66"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/doc88git/flux-entity-permission/zipball/4d8804262261be8644a66623eb89c0deaf4cab66",
+            "reference": "4d8804262261be8644a66623eb89c0deaf4cab66",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">= 7.2.0"
+        },
+        "time": "2020-07-06T19:21:27+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Doc88\\FluxEntityPermission\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Douglas Men",
+                "email": "douglas.men@doc88.com.br"
+            }
+        ],
+        "description": "Biblioteca para implementação de controle de acesso por entidades em aplicações Laravel."
+    },
+    {
+        "name": "mashape/unirest-php",
+        "version": "v3.0.4",
+        "version_normalized": "3.0.4.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Mashape/unirest-php.git",
+            "reference": "842c0f242dfaaf85f16b72e217bf7f7c19ab12cb"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Mashape/unirest-php/zipball/842c0f242dfaaf85f16b72e217bf7f7c19ab12cb",
+            "reference": "842c0f242dfaaf85f16b72e217bf7f7c19ab12cb",
+            "shasum": ""
+        },
+        "require": {
+            "ext-curl": "*",
+            "php": ">=5.4.0"
+        },
+        "require-dev": {
+            "codeclimate/php-test-reporter": "0.1.*",
+            "phpunit/phpunit": "~4.4"
+        },
+        "suggest": {
+            "ext-json": "Allows using JSON Bodies for sending and parsing requests"
+        },
+        "time": "2016-08-11T17:49:21+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Unirest\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "description": "Unirest PHP",
+        "homepage": "https://github.com/Mashape/unirest-php",
+        "keywords": [
+            "client",
+            "curl",
+            "http",
+            "https",
+            "rest"
+        ]
+    }
+]

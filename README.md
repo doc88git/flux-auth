@@ -93,3 +93,12 @@ Classe para realizar funções de Auth no Flux. Os métodos para integração s�
                 "permission": true
             }
         ```
+* **Entity** - Função para verificar permissões por entidade, de acordo com [Flux Entity Permission](https://github.com/doc88git/flux-entity-permission).
+    ```php
+        Authorization::entity( $method, $params )
+    ```
+    * **Parâmetros :**
+        * *method :* Método da classe *EntityPermission*  a ser chamado
+        * *params :* Array de parâmetros para o método selecionado *method*, de acordo com [Flux Entity Permission](https://github.com/doc88git/flux-entity-permission)
+    * **Retorno :**
+        Retorno de acordo com o documentado em [Flux Entity Permission](https://github.com/doc88git/flux-entity-permission).

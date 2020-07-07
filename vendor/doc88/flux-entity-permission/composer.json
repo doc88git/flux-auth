@@ -1,0 +1,20 @@
+{
+    "name": "doc88/flux-entity-permission",
+    "description": "Biblioteca para implementação de controle de acesso por entidades em aplicações Laravel.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Douglas Men",
+            "email": "douglas.men@doc88.com.br"
+        }
+    ],
+    "require": {
+        "php": ">= 7.2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Doc88\\FluxEntityPermission\\": "src/"
+        }
+    }
+}

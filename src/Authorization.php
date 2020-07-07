@@ -6,6 +6,8 @@ use Doc88\Flux\Services\Login;
 use Doc88\Flux\Services\Module;
 use Doc88\Flux\Services\Permission;
 
+use Doc88\FluxEntityPermission\EntityPermission;
+
 class Authorization
 {
 
@@ -25,6 +27,11 @@ class Authorization
     {
         $response = new Permission($account, $product);
         return response()->json( $response->getResponse(['token' => $token, 'action' => $action]) );
+    }
+
+    public static function entity( $method, $params )
+    {
+        return EntityPermission::{$method}(...$params);
     }
 
 }
